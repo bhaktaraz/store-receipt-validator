@@ -271,7 +271,10 @@ class Validator
     {
         $baseUri = (string) $client->getConfig('base_uri');
 
-        $httpResponse = $client->request('POST', '/verifyReceipt', ['body' => $this->prepareRequestData()]);
+        $httpResponse = $client->request('POST', '/verifyReceipt', [
+            'body' => $this->prepareRequestData(),
+            'headers' => ['content-type' => 'application/json']
+        ]);
 
         if ($httpResponse->getStatusCode() !== 200) {
             throw new RunTimeException('Unable to get response from itunes server');
